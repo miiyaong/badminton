@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>배드민턴 게임 현황판 · 파트너 및 경기 기록</title>
+<style>
+:root { --wrks-viz-font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; --wrks-viz-primary: #2563eb; --wrks-viz-bg: #ffffff; --wrks-viz-fg: #111827; --wrks-viz-border: #d1d5db; --wrks-viz-radius: 8px; --wrks-viz-space-1: 4px; --wrks-viz-space-2: 8px; --wrks-viz-space-3: 12px; --wrks-viz-space-4: 16px; }
+*{box-sizing:border-box}body{margin:0;padding:16px;background:#f6f7f8;color:var(--wrks-viz-fg);font:14px var(--wrks-viz-font-family)}h1{font-size:23px;margin:0 0 8px}h2{font-size:17px;margin:0 0 12px}h3{font-size:14px;margin:0 0 8px}p{line-height:1.6}button,input,select{font:inherit}button{cursor:pointer;padding:8px 11px;border:1px solid #b8c1cc;border-radius:4px;background:white;color:#172333}button:hover{background:#eef3fb}button:disabled{opacity:.45;cursor:default}.primary{background:#2563eb;color:white;border-color:#2563eb}.primary:hover{background:#1d4ed8}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}.muted{color:#5d6877;font-size:12px}.panel{padding:14px;background:white;border:1px solid var(--wrks-viz-border);border-radius:8px;margin-top:12px}.layout{display:grid;grid-template-columns:minmax(580px,1fr) 340px;gap:12px}.board{background:#084932;padding:14px;border:8px solid #a6a89b;border-radius:8px;color:white}.courts,.waits{display:grid;grid-template-columns:repeat(4,minmax(110px,1fr));gap:10px}.lane-label{text-align:center;font-size:13px;margin:4px 0 6px}.slots{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#91b3a3;border:2px solid #86b9a1;position:relative}.slot{min-height:79px;background:#fff;color:#162b22;display:flex;align-items:center;justify-content:center;padding:3px;cursor:pointer}.court .slot{background:#087f46}.court .slots{border-color:#84dbab}.court .slots:after{content:"";position:absolute;left:0;right:0;top:50%;border-top:2px solid #b9f0ca;pointer-events:none}.slot.empty:before{content:attr(data-team);font-size:11px;color:#a0ada5}.court .slot.empty:before{color:#8fd7b0}.magnet{width:100%;max-width:126px;text-align:center;padding:7px 3px;line-height:1.35;border:1px solid #aeb9c4;background:#fff;border-radius:7px;color:#172333;cursor:grab}.magnet b{display:block;font-size:13px}.magnet small{display:block;font-size:10px;color:#5b6573}.magnet .group{color:#1d4ed8}.magnet.selected{outline:3px solid #2563eb;outline-offset:0}.pool{background:white;border:1px solid #b8c9bf;color:#172333;min-height:74px;padding:7px;display:flex;flex-wrap:wrap;align-content:flex-start;gap:5px;cursor:pointer}.pool .magnet{width:94px}.bottom{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-top:10px}.lane-actions{display:flex;gap:3px;margin:5px 0 10px}.lane-actions button{font-size:11px;padding:5px;flex:1}.subtle{font-size:11px;text-align:center;margin:5px 0;color:#bdd8c7}.candidate{border:1px solid #d1d5db;padding:12px;margin:8px 0;border-radius:6px}.candidate p{font-size:13px;margin:7px 0}.teams{padding:8px;background:#f4f7fc;line-height:1.8}.candidate button{width:100%;margin-top:8px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fields label{font-size:12px;display:flex;flex-direction:column;gap:5px}.fields input,.fields select{min-width:0;width:100%;border:1px solid #c3ccd6;padding:8px;border-radius:4px}.fields .wide{grid-column:1/-1}.groups{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.groupbox{border:1px solid #cbd5e1;padding:10px;background:#f8fafc}.groupbox .pool{min-height:115px;background:#fff}.notice{padding:10px 12px;border-left:3px solid #2563eb;background:#eef4ff;font-size:13px;line-height:1.55}#msg{position:sticky;top:0;z-index:5;margin:8px 0;background:#fff;border:1px solid #9eacc0;padding:10px;min-height:40px}#stats{font-size:13px;color:#485566}.hidden{display:none!important}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px 6px;border-bottom:1px solid #e2e8f0;text-align:left}th{background:#f8fafc}.num{text-align:right}@media(max-width:980px){.layout{grid-template-columns:1fr}.groups{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){body{padding:8px}.board-scroll{overflow-x:auto}.board{min-width:620px}.groups{grid-template-columns:1fr 1fr}.fields{grid-template-columns:1fr 1fr}h1{font-size:20px}}
+
+.magnet.male,.roster-male{background:#d8efff}.magnet.female,.roster-female{background:#ffe1eb}.magnet.male:hover{background:#c4e6ff}.magnet.female:hover{background:#ffd1e1}.legend{font-size:12px;margin:10px 0}.legend span{display:inline-block;padding:5px 8px;border:1px solid #b8c1cc;margin-right:6px}.upload-box{padding:12px;border:1px dashed #9aa9be;background:#f8fafc}.upload-box input{max-width:100%}.preview-scroll{max-height:300px;overflow:auto;margin-top:10px}.row-error{background:#fff0f0}.row-skip{background:#f3f4f6}.import-status{font-size:13px;line-height:1.6;margin:10px 0}.import-status.error{color:#991b1b}#playerEditor:focus{outline:2px solid #2563eb}
+</style>
+<style id="sheet-sync-dynamic-style">
+.sheet-sync-box{border:1px solid #d1d5db;border-radius:8px;padding:12px;margin:10px 0;background:#fff}
+.sheet-sync-box h3{margin:0 0 8px 0;font-size:16px}
+.sheet-sync-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0}
+.sheet-sync-row input{min-width:280px;flex:1;padding:8px;border:1px solid #d1d5db;border-radius:6px}
+.sheet-sync-row button{padding:8px 10px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer}
+.sheet-sync-row button.primary{background:#2563eb;color:#fff;border-color:#2563eb}
+.sheet-sync-status{font-size:13px;color:#4b5563;margin-top:6px}
+.groupbox.sheet-empty-compact{min-height:unset!important;padding:8px!important;opacity:.75}
+.groupbox.sheet-empty-compact .pool{min-height:28px!important;padding:4px!important}
+.groupbox.sheet-empty-compact .muted{display:none!important}
+</style>
+
+</head><body>
+
+<div id="sheetSyncPanel" class="sheet-sync-box">
+  <h3>구글 스프레드시트 연동</h3>
+  <div class="sheet-sync-row">
+    <input id="sheetUrl" type="url" placeholder="공개 구글시트 URL 또는 CSV 공개 URL을 붙여넣으세요">
+    <button class="primary" type="button" id="sheetSyncNow">지금 동기화</button>
+    <button type="button" id="sheetSyncSave">주소 저장</button>
+  </div>
+  <div class="sheet-sync-row">
+    <label><input id="sheetAutoSync" type="checkbox" checked> 30초마다 자동 동기화</label>
+  </div>
+  <div class="sheet-sync-status" id="sheetSyncStatus">시트 컬럼: playerId, name, gender, birthYear, level, group</div>
+</div>
+
+<header><h1>배드민턴 게임 현황판</h1><div class="muted">4코트 · M1~M6 / F1~F6 그룹 · 남복·여복·혼복 추천 · 경기 기록을 지원합니다.</div></header>
+<div class="toolbar"><button id="boardTab" class="primary" onclick="view('board')">현황판</button><button id="groupTab" onclick="view('group')">그룹 / 선수 관리</button><button id="partnerTab" onclick="view('partner')">파트너</button><button id="recordTab" onclick="view('record')">기록</button><button onclick="openEditor()">선수 라벨 추가</button><button onclick="openImport()">엑셀 일괄 등록</button><button onclick="undo()">직전 작업 취소</button><button onclick="backup()">JSON 백업</button><button onclick="document.getElementById('restore').click()">백업 불러오기</button><input id="restore" type="file" accept="application/json,.json" hidden onchange="restoreFile(this)"><button onclick="resetSession()">새 모임 시작</button><button onclick="emptyAll()">명단 비우기</button></div>
+<div id="stats"></div><div id="msg" role="status" aria-live="polite">처음에는 가상 선수 48명이 표시됩니다. 실제 운영 전 명단을 비우고 선수를 등록하세요.</div>
+<div id="boardView" class="layout"><main><div class="board-scroll"><div class="board"><div class="courts" id="courts"></div><div class="waits" id="waits"></div><div class="bottom"><section><div class="lane-label">대기 (게임 가능)</div><div id="freePool" class="pool" data-loc="free"></div></section><section><div class="lane-label">잠시 휴식</div><div id="restPool" class="pool" data-loc="rest"></div></section><section><div class="lane-label">게임 종료</div><div id="donePool" class="pool" data-loc="done"></div></section></div><div class="subtle">각 코트와 대기 칸의 윗줄은 A팀이며 아랫줄은 B팀입니다.</div></div></div><p class="muted">PC에서는 카드를 끌어 이동할 수 있습니다. 휴대폰에서는 선수를 누른 뒤 빈 칸이나 이동할 영역을 누르세요. 카드 이동은 선수의 그룹을 변경하지 않습니다.</p></main>
+<aside><section class="panel" style="margin-top:0"><h2>랜덤 경기 추천</h2><div class="notice" style="display:none">일반 추천에서 남복·여복은 같은 성별의 서로 다른 두 그룹에서 각 2명을 뽑고, 혼복은 남자·여자 한 그룹씩에서 각 2명을 뽑습니다. 파트너 우선 추천에서는 등록한 두 사람을 같은 팀으로 묶고, 비슷한 실력의 상대 두 명을 찾습니다. 혼복 일반 추천 인원이 부족하면 같은 인접 그룹 번호의 남녀 네 그룹에서 각 1명을 뽑습니다. 예를 들어 M1 + F2 대 M2 + F1로 교차 편성하며, 1·3처럼 떨어진 그룹은 이 방식에서 제외합니다. 모든 추천은 종목별 성별 조건을 지킵니다.</div><p class="muted" style="display:none">대기(게임 가능)에 있는 그룹 지정 선수만 참여합니다. 1그룹이 가장 높은 실력이며 6그룹까지 순서대로 낮아집니다. 추천 버튼을 누를 때 50% 확률로 등록 파트너를 같은 팀으로 우선 추천합니다. 상대는 같은 그룹부터 찾고 부족하면 인접 그룹으로 넓힙니다. 나머지는 일반 랜덤 추천입니다.</p><div class="toolbar"><button class="primary" onclick="recommend('남복')">남복 추천</button><button class="primary" onclick="recommend('여복')">여복 추천</button><button class="primary" onclick="recommend('혼복')">혼복 추천</button></div><p class="muted" style="display:none">버튼을 누르면 해당 종목의 후보를 최대 3개 생성합니다.</p><div id="candidates"><p class="muted">후보를 생성한 후 한 경기를 선택하면 빈 대기 칸에 들어갑니다.</p></div></section>
+<section class="panel" id="playerEditor" tabindex="-1"><h2>선수 라벨 추가 / 수정</h2><div class="legend"><span style="background:#d8efff">남성은 하늘색입니다.</span><span style="background:#ffe1eb">여성은 연분홍색입니다.</span></div><div class="fields"><label class="wide">수정할 선수<select id="editId" onchange="fillEditor()"><option value="">새 선수 등록</option></select></label><label>이름<input id="name" maxlength="24" placeholder="홍길동"></label><label>성별<select id="gender"><option value="">미지정</option><option value="남">남성</option><option value="여">여성</option></select></label><label>출생년도<input id="age" type="text" inputmode="numeric" pattern="[0-9]{1,4}" maxlength="4" placeholder="예: 1990 또는 90" oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"></label><label>급수<input id="level" maxlength="12" placeholder="예: D"></label><label>운영진 지정 그룹<select id="group"><option value="0">미지정</option><optgroup label="남자 그룹"><option value="1">M1</option><option value="2">M2</option><option value="3">M3</option><option value="4">M4</option><option value="5">M5</option><option value="6">M6</option></optgroup><optgroup label="여자 그룹"><option value="7">F1</option><option value="8">F2</option><option value="9">F3</option><option value="10">F4</option><option value="11">F5</option><option value="12">F6</option></optgroup></select></label></div><div class="toolbar"><button class="primary" onclick="savePlayer()">등록 / 저장</button><button onclick="openEditor()">새 선수 입력</button><button onclick="deletePlayer()">선수 삭제</button></div><p class="muted">선수 성별과 같은 성별의 그룹만 지정할 수 있습니다. 같은 급수라도 그룹을 다르게 지정할 수 있습니다. 각 성별의 1~6그룹은 실력 순서이며 1그룹이 가장 높은 실력입니다.</p></section></aside></div>
+<div id="groupView" class="hidden"><section class="panel"><h2>운영진 지정 실력 그룹</h2><p class="muted">카드를 다른 그룹으로 끌거나 선수를 선택한 뒤 그룹 안을 누르면 소속을 바꿉니다. 경기 중인 선수도 표시되지만 경기 추천에는 게임 가능한 선수만 포함합니다. 선수 정보 수정은 현황판 오른쪽에서 할 수 있습니다.</p><div id="groups" class="groups"></div></section><section class="panel"><h2>선수 명단</h2><div class="table-wrap"><table><thead><tr><th>이름</th><th>성별</th><th>출생년도</th><th>급수</th><th>그룹</th><th>현재 위치</th><th class="num">완료 경기</th><th>수정</th></tr></thead><tbody id="roster"></tbody></table></div></section></div>
+
+<div id="partnerView" class="hidden"><section class="panel"><h2>파트너 관리</h2><div class="notice">선수 한 명은 동성 파트너(남복 또는 여복) 1쌍과 혼복 파트너 1쌍을 각각 등록할 수 있습니다. 이름 뒤에 파트너별 이모티콘이 최대 2개 표시됩니다. 다른 쌍과 이모티콘이 겹치지 않도록 지정하세요.</div><p>파트너는 현재 위치나 그룹 지정 여부와 관계없이 등록할 수 있으며, 해제하거나 선수를 삭제하기 전까지 계속 유지됩니다. 휴식·경기·게임 대기 중에도 이모티콘이 유지됩니다. 실제 랜덤 추천에만 두 사람이 모두 게임 가능 대기에 있고 그룹과 성별이 지정되어야 합니다. 남자끼리는 남복, 여자끼리는 여복, 남녀 파트너는 혼복에 참여합니다.</p><div class="fields"><label>첫 번째 선수<select id="partnerA"></select></label><label>두 번째 선수<select id="partnerB"></select></label><label>공통 이모티콘<select id="partnerEmoji"></select></label></div><div class="toolbar"><button class="primary" onclick="savePartner()">파트너 등록</button></div><p class="muted">추천 버튼을 누를 때마다 한 번만 50% 추첨하며, 생성되는 후보들은 같은 추천 방식을 사용합니다. 여러 쌍이 가능하면 쌍을 무작위로 고릅니다. 파트너 추천 조건이 맞지 않으면 일반 추천을 사용합니다. 일반 추천에서도 우연히 같은 팀이 될 수 있으므로 실제 같은 팀 비율이 정확히 50%인 것은 아닙니다.</p><p class="muted">파트너가 3·4그룹이면 상대도 3·4그룹 조합을 최우선으로 찾습니다. 부족하면 가까운 2·5그룹을 포함하고, 그래도 부족하면 1·6그룹까지 넓힙니다. 같은 그룹 파트너도 등록할 수 있습니다. 이모티콘을 변경하려면 해제 후 다시 등록하세요.</p><div id="partnerStats" class="muted"></div><div class="table-wrap"><table><thead><tr><th>표시</th><th>첫 번째 선수</th><th>두 번째 선수</th><th>종목</th><th>상태</th><th>관리</th></tr></thead><tbody id="partnerRows"></tbody></table></div></section></div>
+<div id="recordView" class="hidden"><section class="panel"><h2>경기 기록</h2><p class="muted">코트에 4명이 배치되면 경기를 시작한 것으로 보고 순번을 부여합니다. 추천 후보와 대기 경기는 아직 기록하지 않습니다. 선수 이름과 그룹은 시작 당시 정보로 보관합니다. 새 모임을 시작하거나 명단을 비워도 이전 기록은 유지합니다. 직전 작업 취소는 기록 변경도 함께 되돌립니다.</p><div id="recordStats" class="notice"></div><div class="table-wrap"><table><thead><tr><th class="num">순번</th><th class="num">모임</th><th>코트 / 종목</th><th>A팀</th><th>B팀</th><th>시작 / 종료</th><th>상태</th></tr></thead><tbody id="recordRows"></tbody></table></div></section></div>
+<section class="panel" id="importPanel" tabindex="-1">
+<h2>엑셀로 선수 라벨 일괄 추가</h2>
+<p>첫 번째 시트의 1행을 <b>A열 이름 · B열 성별 · C열 출생년도 · D열 급수</b>로 작성하세요. 2행부터 선수를 입력합니다.</p>
+<div class="toolbar"><button onclick="downloadTemplate()">엑셀 양식 다운로드</button></div>
+<div class="upload-box"><label for="excelFile">선수 명단 엑셀 파일을 선택하세요. (.xlsx, 최대 5MB)</label><br><br><input id="excelFile" type="file" accept=".xlsx" onchange="readExcel(this)"></div>
+<p class="muted">성별은 남/여, 남자/여자, 남성/여성 또는 M/F로 입력할 수 있습니다. 출생년도와 급수는 비워 둘 수 있습니다. 기존 선수는 유지하며 새 선수는 그룹 미지정·게임 가능 대기로 추가합니다. 이름·성별·출생년도·급수가 모두 같은 행은 중복으로 제외하고, 이름만 같으면 별도 선수로 등록합니다. 같은 정보의 동명이인은 개별 등록을 이용하세요.</p>
+<p class="muted">최대 총 500명까지 등록합니다. 오류가 있으면 파일을 수정한 뒤 다시 올려 주세요. 구형 .xls 파일은 Excel에서 .xlsx로 다시 저장해야 합니다. 최신 Chrome 또는 Edge를 권장합니다.</p>
+<div id="importStatus" class="import-status" role="status" aria-live="polite">파일을 선택하면 등록 전에 미리보기를 표시합니다.</div>
+<div id="importPreview" class="preview-scroll"></div>
+<div class="toolbar"><button id="importConfirm" class="primary" disabled onclick="confirmImport()">확인 후 일괄 등록</button><button onclick="clearImport()">업로드 취소</button></div>
+</section>
+<footer class="panel muted" id="storageNote">이 시제품은 한 브라우저에서 사용합니다. 자동 저장 가능 여부를 확인하고, 운영 후에는 JSON 백업을 내려받으세요. 여러 기기 간 동기화는 지원하지 않습니다.</footer>
+<script>
+'use strict';
+const KEY='badminton-board-mvp-v2';
+const LEGACY_KEY='badminton-board-mvp-v1';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let state={version:2,partners:[],players:[],records:[],nextMatchNo:1,session:1}, selected=null, proposals=[], history=[];
+function demo(){
+  return {version:2,partners:[],records:[],nextMatchNo:1,session:1,players:Array.from({length:48},(_,i)=>({id:'demo-'+i,name:'가상'+String(i+1).padStart(2,'0'),age:String(1980+(i%25)),gender:i<24?'남':'여',level:['A','B','C','D'][i%4],group:Math.floor(i/4)+1,loc:'free',games:0}))};
+}
+function valid(s){
+  if(!s||![1,2].includes(s.version)||!Array.isArray(s.players)||s.players.length>500)return false;
+  const ids=new Set(),slots=new Set();
+  for(const p of s.players){
+    if(!validPerson(p)||ids.has(p.id)||!Number.isInteger(p.games)||p.games<0||typeof p.loc!=='string'||p.group>(s.version===1?7:12))return false;
+    if(s.version===2&&!groupFits(p.gender,p.group))return false;
+    ids.add(p.id);
+    if(!['free','rest','done','lesson'].includes(p.loc)){
+      if(!/^(court|wait)[1-4]:[0-3]$/.test(p.loc)||slots.has(p.loc))return false;
+      slots.add(p.loc);
+    }
+  }
+  if(s.version===1)return true;
+  if(!Array.isArray(s.records)||!Number.isSafeInteger(s.nextMatchNo)||s.nextMatchNo<1||!Number.isSafeInteger(s.session)||s.session<1)return false;
+  const nums=new Set(),activeCourts=new Set();
+  for(const r of s.records){
+    if(!r||!Number.isSafeInteger(r.no)||r.no<1||r.no>=s.nextMatchNo||nums.has(r.no)||!Number.isInteger(r.session)||r.session<1||r.session>s.session||![1,2,3,4].includes(r.court)||!['남복','여복','혼복','기타'].includes(r.type)||!['진행 중','완료','취소'].includes(r.status)||!validTime(r.startedAt)||!(r.endedAt===null||validTime(r.endedAt))||typeof r.note!=='string'||r.note.length>300)return false;
+    if(!Array.isArray(r.teamA)||!Array.isArray(r.teamB)||r.teamA.length!==2||r.teamB.length!==2)return false;
+    const ps=r.teamA.concat(r.teamB);
+    if(ps.some(p=>!validPerson(p)||!groupFits(p.gender,p.group))||new Set(ps.map(p=>p.id)).size!==4||r.type!==matchType(ps))return false;
+    if(r.status==='진행 중'){
+      if(r.endedAt!==null||r.session!==s.session||activeCourts.has(r.court)||ps.some((p,k)=>!s.players.some(q=>q.id===p.id&&q.loc==='court'+r.court+':'+k)))return false;
+      activeCourts.add(r.court);
+    }else if(r.endedAt===null)return false;
+    nums.add(r.no);
+  }
+  if(s.partners!==undefined&&partnerError(s.partners,s.players))return false;
+  return true;
+}
+function validTime(t){return typeof t==='string'&&t.length<=40&&Number.isFinite(Date.parse(t));}
+function validBirth(v){return v===''||((typeof v==='string'||typeof v==='number')&&/^\d{1,4}$/.test(String(v)));}
+function validPerson(p){return !!p&&typeof p.id==='string'&&p.id.length>0&&p.id.length<=100&&typeof p.name==='string'&&p.name.trim().length>0&&p.name.length<=24&&typeof p.level==='string'&&p.level.length<=12&&Number.isInteger(p.group)&&p.group>=0&&p.group<=12&&validBirth(p.age)&&(p.gender===undefined||['','남','여'].includes(p.gender));}
+function groupName(g){return g===0?'미지정':g<=6?'남자 '+g:'여자 '+(g-6);}
+function groupGender(g){return g===0?'':g<=6?'남':'여';}
+function groupFits(gender,g){return Number.isInteger(g)&&g>=0&&g<=12&&(g===0||gender===groupGender(g));}
+function matchType(ps){
+  if(ps.every(p=>p.gender==='남'))return '남복';
+  if(ps.every(p=>p.gender==='여'))return '여복';
+  if([ps.slice(0,2),ps.slice(2)].every(t=>t.some(p=>p.gender==='남')&&t.some(p=>p.gender==='여')))return '혼복';
+  return '기타';
+}
+function activeRecord(n){return state.records.find(r=>r.court===n&&r.status==='진행 중');}
+function snapshot(p){return {id:p.id,name:p.name,gender:p.gender||'',age:p.age,level:p.level,group:p.group,partnerEmoji:partnerIcon(p.id)};}
+function ensureRecord(n,note=''){
+  if(activeRecord(n))return;
+  const ps=[0,1,2,3].map(k=>state.players.find(p=>p.loc==='court'+n+':'+k));
+  if(ps.some(p=>!p))return;
+  state.records.push({no:state.nextMatchNo++,session:state.session,court:n,type:matchType(ps),teamA:ps.slice(0,2).map(snapshot),teamB:ps.slice(2).map(snapshot),startedAt:new Date().toISOString(),endedAt:null,status:'진행 중',note});
+}
+function closeRecord(n,status,note=''){
+  const r=activeRecord(n);if(!r)return;
+  r.status=status;r.endedAt=new Date().toISOString();if(note)r.note=r.note?r.note+' / '+note:note;
+}
+function renderRecords(){
+  const names=ps=>ps.map(p=>esc(p.name+(p.partnerEmoji?' '+p.partnerEmoji:''))+' <span class="muted">('+groupName(p.group)+')</span>').join('<br>');
+  const time=t=>t?esc(new Date(t).toLocaleString('ko-KR',{hour12:false})):'—';
+  $('recordStats').textContent='전체 '+state.records.length+'경기 · 진행 중 '+state.records.filter(r=>r.status==='진행 중').length+'경기 · 완료 '+state.records.filter(r=>r.status==='완료').length+'경기 · 취소 '+state.records.filter(r=>r.status==='취소').length+'경기 · 현재 모임 '+state.session;
+  $('recordRows').innerHTML=state.records.slice().sort((a,b)=>b.no-a.no).map(r=>'<tr><td class="num">'+r.no+'</td><td class="num">'+r.session+'</td><td>'+r.court+'코트 / '+esc(r.type)+'</td><td>'+names(r.teamA)+'</td><td>'+names(r.teamB)+'</td><td>'+time(r.startedAt)+'<br>'+time(r.endedAt)+'</td><td>'+esc(r.status)+(r.note?'<br><span class="muted">'+esc(r.note)+'</span>':'')+'</td></tr>').join('')||'<tr><td colspan="7">아직 시작한 경기가 없습니다.</td></tr>';
+}
+function migrate(s){
+  const legacy=s.version===1;
+  s.players.forEach(p=>{
+    if(p.gender===undefined)p.gender='';if(p.loc==='lesson')p.loc='free';
+    if(legacy)p.group=p.group>=1&&p.group<=6&&p.gender?(p.group+(p.gender==='여'?6:0)):0;
+  });
+  if(legacy){s.version=2;s.records=[];s.nextMatchNo=1;s.session=1;}
+  if(!s.partners)s.partners=[];
+  return s;
+}
+try{
+  const raw=localStorage.getItem(KEY)||localStorage.getItem(LEGACY_KEY);
+  if(raw){
+    const s=JSON.parse(raw);
+    if(valid(s)){const legacy=s.version===1;state=migrate(s);$('msg').textContent='이 브라우저에 저장된 명단을 불러왔습니다.'+(legacy?' 기존 1~6그룹은 성별에 맞게 옮겼습니다. 기존 7그룹 및 성별 미지정 선수는 그룹을 다시 지정하세요.':'');}
+    else {state=demo();$('msg').textContent='저장된 데이터 형식이 맞지 않아 가상 명단을 표시합니다.';}
+  }else state=demo();
+}catch(e){state=demo();$('msg').textContent='자동 저장 데이터를 읽지 못해 가상 명단을 표시합니다. JSON 백업을 이용하세요.';}
+function tell(s){$('msg').textContent=s;}
+function persist(){
+  try{
+    localStorage.setItem(KEY,JSON.stringify(state));
+    $('storageNote').textContent='이 브라우저에 자동 저장했습니다. HTML 파일을 직접 열면 브라우저에 따라 저장이 유지되지 않을 수 있으므로 JSON 백업을 권장합니다. 기기 간 동기화는 지원하지 않습니다.';
+  }catch(e){$('storageNote').textContent='이 환경에서는 자동 저장을 사용할 수 없습니다. 창을 닫기 전에 반드시 JSON 백업을 내려받으세요.';}
+}
+function checkpoint(){history.push(JSON.stringify(state));if(history.length>30)history.shift();}
+function commit(message){state.partners=state.partners||[];for(let n=1;n<=4;n++)ensureRecord(n);selected=null;proposals=[];persist();render();if(message)tell(message);}
+function undo(){if(!history.length)return tell('취소할 작업이 없습니다.');state=JSON.parse(history.pop());commit('직전 작업을 취소했습니다.');}
+function view(v){for(const name of ['board','group','partner','record']){$(name+'View').classList.toggle('hidden',v!==name);$(name+'Tab').classList.toggle('primary',v===name);}$('importPanel').classList.toggle('hidden',v!=='board');}
+function get(id){return state.players.find(p=>p.id===id);}
+function placeName(loc){const m=loc.match(/^(court|wait)(\d):/);return m?(m[1]==='court'?m[2]+'코트':'대기 '+m[2]):({free:'게임 가능',rest:'잠시 휴식',done:'게임 종료'}[loc]||loc);}
+function card(p){return '<button type="button" class="magnet'+(p.gender==='남'?' male':p.gender==='여'?' female':'')+(selected===p.id?' selected':'')+'" draggable="true" data-id="'+esc(p.id)+'" aria-label="'+esc(p.name+' 선택, '+placeName(p.loc))+'"><b>'+esc(playerLabel(p))+'</b><small>'+esc(p.gender||'성별 미지정')+' · '+(p.age===''?'출생년도 미입력':esc(p.age))+' · '+esc(p.level||'급수 미입력')+'</small><small class="group">'+(p.group?groupName(p.group):'그룹 미지정')+' · '+p.games+'게임</small></button>';}
+function lane(type,n){
+  let s='<section class="'+(type==='court'?'court':'wait')+'"><div class="lane-label">'+(type==='court'?n+'코트':'대기 '+n)+'</div><div class="slots">';
+  for(let k=0;k<4;k++){
+    const loc=type+n+':'+k,p=state.players.find(p=>p.loc===loc);
+    s+='<div class="slot'+(p?'':' empty')+'" data-loc="'+loc+'" data-team="'+(k<2?'A팀':'B팀')+'">'+(p?card(p):'')+'</div>';
+  }
+  s+='</div><div class="lane-actions">';
+  if(type==='wait')s+='<button onclick="startGame('+n+')">빈 코트로 입장</button><button onclick="releaseLane(\'wait\','+n+')">해제</button>';
+  else s+='<button onclick="finishGame('+n+')">완료 → 대기</button><button onclick="releaseLane(\'court\','+n+')">취소</button>';
+  return s+'</div></section>';
+}
+function members(type,n){return state.players.filter(p=>p.loc.startsWith(type+n+':'));}
+function render(){
+  $('courts').innerHTML=[1,2,3,4].map(n=>lane('court',n)).join('');
+  $('waits').innerHTML=[1,2,3,4].map(n=>lane('wait',n)).join('');
+  for(const loc of ['free','rest','done'])$(loc+'Pool').innerHTML=state.players.filter(p=>p.loc===loc).map(card).join('');
+  const free=state.players.filter(p=>p.loc==='free');
+  $('stats').textContent='등록 '+state.players.length+'명 · 게임 가능 '+free.length+'명 · 경기 중 '+state.players.filter(p=>p.loc.startsWith('court')).length+'명 · 게임 대기 '+state.players.filter(p=>p.loc.startsWith('wait')).length+'명';
+  $('groups').innerHTML=window.sheetGroupList().map(g=>{
+    const ps=state.players.filter(p=>p.group===g);
+    return '<section class="groupbox"><h3>'+groupName(g)+' · '+ps.length+'명</h3><p class="muted">게임 가능한 선수가 '+ps.filter(p=>p.loc==='free').length+'명 있습니다.</p><div class="pool" data-group="'+g+'">'+ps.map(card).join('')+'</div></section>';
+  }).join('');
+  $('roster').innerHTML=state.players.map(p=>'<tr class="'+(p.gender==='남'?'roster-male':p.gender==='여'?'roster-female':'')+'"><td>'+esc(playerLabel(p))+'</td><td>'+esc(p.gender||'미지정')+'</td><td>'+esc(p.age||'—')+'</td><td>'+esc(p.level||'—')+'</td><td>'+groupName(p.group)+'</td><td>'+placeName(p.loc)+'</td><td class="num">'+p.games+'</td><td><button data-edit="'+esc(p.id)+'">수정</button></td></tr>').join('');
+  const prev=$('editId').value;
+  $('editId').innerHTML='<option value="">새 선수 등록</option>'+state.players.map(p=>'<option value="'+esc(p.id)+'">'+esc(playerLabel(p))+'</option>').join('');
+  if(get(prev))$('editId').value=prev;
+  renderCandidates();renderRecords();renderPartners();
+  if(importRows.length&&!importBusy)previewImport();
+}
+function renderCandidates(){
+  $('candidates').innerHTML=proposals.length?proposals.map((c,i)=>{
+    const names=ids=>ids.map(id=>esc(playerLabel(get(id)))).join(' + ');
+    return '<section class="candidate"><h3>후보 '+(i+1)+' · '+esc(c.type)+(c.partner?' · 파트너 우선':c.adjacent?' · 인접 그룹 교차':' · 일반 랜덤')+' · '+c.groups.map(groupName).join(' / ')+'</h3><div class="teams">A팀: '+names(c.ids.slice(0,2))+'<br>B팀: '+names(c.ids.slice(2))+'</div><button class="primary" onclick="accept('+i+')">이 경기를 대기에 넣기</button></section>';
+  }).join(''):'<p class="muted">후보를 생성한 후 한 경기를 선택하세요. 명단이나 현황판을 변경하면 기존 후보는 해제됩니다.</p>';
+}
+function transfer(id,dest){
+  const p=get(id);if(!p)return;
+  if(p.loc===dest){selected=null;render();return;}
+  if(state.players.some(x=>x.loc===dest)&&/^(court|wait)/.test(dest))return tell('이미 선수가 있는 칸입니다. 빈 칸으로 이동하세요.');
+  if(p.loc.startsWith('court')&&activeRecord(Number(p.loc[5])))return tell('진행 중인 경기의 선수는 직접 이동할 수 없습니다. 먼저 경기를 완료하거나 취소하세요.');
+  checkpoint();p.loc=dest;commit(p.name+' 선수를 '+placeName(dest)+' 위치로 이동했습니다.');
+}
+function changeGroup(id,g){const p=get(id);if(!p||p.group===g)return;if(!groupFits(p.gender,g))return tell('선수 성별과 같은 그룹을 선택하세요. 성별이 미지정이면 선수 정보에서 먼저 지정하세요.');checkpoint();p.group=g;commit(p.name+' 선수의 그룹을 '+groupName(g)+'(으)로 변경했습니다.');}
+document.addEventListener('click',e=>{
+  const edit=e.target.closest('[data-edit]');if(edit){view('board');$('editId').value=edit.dataset.edit;fillEditor();$('name').focus();return;}
+  const c=e.target.closest('[data-id]');
+  if(c){selected=selected===c.dataset.id?null:c.dataset.id;render();tell(selected?get(selected).name+' 선수를 선택했습니다. 빈 칸, 이동할 영역 또는 그룹을 누르세요.':'선수 선택을 해제했습니다.');return;}
+  const dest=e.target.closest('[data-loc],[data-group]');
+  if(dest&&selected){if(dest.dataset.loc)transfer(selected,dest.dataset.loc);else changeGroup(selected,Number(dest.dataset.group));}
+});
+document.addEventListener('dragstart',e=>{const c=e.target.closest('[data-id]');if(c){e.dataTransfer.setData('text/plain',c.dataset.id);e.dataTransfer.effectAllowed='move';}});
+document.addEventListener('dragover',e=>{if(e.target.closest('[data-loc],[data-group]'))e.preventDefault();});
+document.addEventListener('drop',e=>{
+  const d=e.target.closest('[data-loc],[data-group]');if(!d)return;e.preventDefault();const id=e.dataTransfer.getData('text/plain');
+  if(d.dataset.loc)transfer(id,d.dataset.loc);else changeGroup(id,Number(d.dataset.group));
+});
+function fillEditor(){const p=get($('editId').value);$('name').value=p?p.name:'';$('gender').value=p?(p.gender||''):'';$('age').value=p?p.age:'';$('level').value=p?p.level:'';$('group').value=p?p.group:0;}
+function savePlayer(){
+  const name=$('name').value.trim(),gender=$('gender').value,level=$('level').value.trim(),age=$('age').value,group=Number($('group').value),id=$('editId').value;
+  if(!name||name.length>24||level.length>12)return tell('이름은 1~24자, 급수는 12자 이하로 입력하세요.');
+  if(!validBirth(age))return tell('출생년도는 숫자만 최대 4자리로 입력하거나 비워 두세요.');
+  if(!groupFits(gender,group))return tell('선수 성별과 같은 성별의 그룹을 선택하거나 미지정으로 바꾸세요.');
+  if(!id&&state.players.length>=500)return tell('이 시제품은 최대 500명까지 등록할 수 있습니다.');
+  if(id){const error=partnerError(state.partners||[],state.players.map(p=>p.id===id?{...p,gender}:p));if(error)return tell('성별을 변경할 수 없습니다. '+error);}
+  checkpoint();
+  if(id)Object.assign(get(id),{name,gender,level,age,group});
+  else state.players.push({id:'p-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2),name,gender,level,age,group,loc:'free',games:0});
+  commit(name+' 선수 정보를 저장했습니다.');$('editId').value='';fillEditor();
+}
+function deletePlayer(){const p=get($('editId').value);if(!p)return tell('삭제할 선수를 먼저 선택하세요.');if(p.loc.startsWith('court')&&activeRecord(Number(p.loc[5])))return tell('경기 중인 선수는 먼저 경기를 완료하거나 취소한 뒤 삭제하세요.');if(!confirm(p.name+' 선수를 명단과 현황판에서 삭제할까요? 기록에 저장된 이름은 유지됩니다.'))return;checkpoint();state.players=state.players.filter(x=>x.id!==p.id);state.partners=(state.partners||[]).filter(pair=>!pair.ids.includes(p.id));commit('선수를 삭제했습니다.');fillEditor();}
+function releaseLane(type,n){const ps=members(type,n);if(!ps.length)return;if(!confirm('이 칸의 선수를 게임 가능 대기로 돌려보낼까요? 완료 경기 수는 증가하지 않습니다.'+(type==='court'?' 진행 중인 경기는 취소 기록으로 남습니다.':'')))return;checkpoint();if(type==='court')closeRecord(n,'취소','운영진이 경기를 취소했습니다.');ps.forEach(p=>p.loc='free');commit('선수를 게임 가능 대기로 돌려보냈습니다.');}
+function finishGame(n){const ps=members('court',n);if(ps.length!==4)return tell('경기 완료 처리는 코트에 선수가 4명 있을 때 가능합니다.');checkpoint();ensureRecord(n);closeRecord(n,'완료');ps.forEach(p=>{p.games++;p.loc='free';});commit(n+'코트 경기를 완료하고 4명을 게임 가능 대기로 돌려보냈습니다.');}
+function startGame(n){
+  const ps=members('wait',n);if(ps.length!==4)return tell('대기 칸에 선수가 4명 있어야 입장할 수 있습니다.');
+  const target=[1,2,3,4].find(k=>!members('court',k).length);if(!target)return tell('완전히 비어 있는 코트가 없습니다.');
+  checkpoint();ps.forEach(p=>p.loc='court'+target+':'+p.loc.split(':')[1]);commit('대기 '+n+' 경기를 '+target+'코트로 이동했습니다.');
+}
+
+// Registrations are persistent and independent of location/group readiness.
+function partnerError(pairs,players){
+  if(!Array.isArray(pairs)||pairs.length>500)return '파트너 데이터 형식을 확인하세요.';
+  const people=new Map(players.map(p=>[p.id,p])),used=new Map(),pairIds=new Set(),icons=new Set();
+  for(const pair of pairs){
+    if(!pair||typeof pair.id!=='string'||!pair.id||pair.id.length>100||pairIds.has(pair.id)||!Array.isArray(pair.ids)||pair.ids.length!==2||pair.ids[0]===pair.ids[1]||pair.ids.some(id=>!people.has(id))||typeof pair.emoji!=='string'||!pair.emoji.trim()||pair.emoji.length>16||icons.has(pair.emoji))return '파트너 데이터 또는 이모티콘이 중복되었습니다.';
+    const type=partnerType(pair.ids.map(id=>people.get(id)))||'미지정';
+    for(const id of pair.ids){
+      const types=used.get(id)||new Set();
+      if(types.has(type)||types.size>=2||types.has('미지정')||(type==='미지정'&&types.size))return '한 선수는 동성 파트너 1쌍과 혼복 파트너 1쌍까지 등록할 수 있습니다. 같은 종목의 기존 파트너를 먼저 해제하세요.';
+      types.add(type);used.set(id,types);
+    }
+    pairIds.add(pair.id);icons.add(pair.emoji);
+  }
+  return '';
+}
+function partnerIcon(id){return (state.partners||[]).filter(pair=>pair.ids.includes(id)).map(pair=>pair.emoji).join(' ');}
+function playerLabel(p){const icon=partnerIcon(p.id);return p.name+(icon?' '+icon:'');}
+function partnerType(ps){
+  if(ps.length!==2||ps.some(p=>!p||!['남','여'].includes(p.gender)))return '';
+  return ps[0].gender===ps[1].gender?(ps[0].gender==='남'?'남복':'여복'):'혼복';
+}
+function available(p){return !!p&&p.loc==='free'&&p.group>0&&groupFits(p.gender,p.group);}
+function renderPartners(){
+  const pairs=state.partners||[];
+  for(const id of ['partnerA','partnerB']){
+    const previous=$(id).value;
+    $(id).innerHTML='<option value="">선수를 선택하세요</option>'+state.players.map(p=>'<option value="'+esc(p.id)+'">'+esc(p.name)+' / '+groupName(p.group)+' / '+placeName(p.loc)+'</option>').join('');
+    if(get(previous))$(id).value=previous;
+  }
+  const icons=['😀','😎','🥳','🤩','🐶','🐱','🐭','🐹','🐰','🦊','🐻','🐼','🐨','🐯','🦁','🐮','🐷','🐸','🐵','🐧','🐦','🐤','🦆','🦉','🦋','🐢','🐬','🐳','🦈','🐙','🦄','🐝','🐞','🦀','🦒','🦓','🐘','🦔','🍎','🍊','🍋','🍉','🍇','🍓','🍒','🍑','🥝','🥑','🍍','🥥','🌸','🌼','🌻','🌹','🍀','🌵','🌴','🍁','⭐','🌙','☀️','🌈','🔥','💧','❄️','⚡','🎈','🎁','🎀','🎯','🎲','🎸','🎺','🎻','⚽','🏀','🏈','🎾','🏸','🚀','✈️','🚁','🚂','🚗','🚕','🚙','🚌','🚲','⛵','⚓','💎','👑','🔔','💡','🔑','🧩'];
+  const old=$('partnerEmoji').value,usedIcons=new Set(pairs.map(pair=>pair.emoji));
+  $('partnerEmoji').innerHTML=icons.filter(icon=>!usedIcons.has(icon)).map(icon=>'<option value="'+esc(icon)+'">'+icon+'</option>').join('');
+  // After the base set is exhausted, numbered emoji remain distinct.
+  if(!$('partnerEmoji').innerHTML){let n=1;while(usedIcons.has('🏸'+n))n++;$('partnerEmoji').innerHTML='<option>🏸'+n+'</option>';}
+  if(old&&!usedIcons.has(old)&&icons.includes(old))$('partnerEmoji').value=old;
+  $('partnerStats').textContent='등록한 파트너는 '+pairs.length+'쌍입니다.';
+  $('partnerRows').innerHTML=pairs.map((pair,i)=>{
+    const ps=pair.ids.map(get),type=partnerType(ps),ready=ps.every(available)&&!!type;
+    return '<tr><td>'+esc(pair.emoji)+'</td>'+ps.map(p=>'<td>'+esc(playerLabel(p))+'<br><span class="muted">'+groupName(p.group)+' · '+placeName(p.loc)+'</span></td>').join('')+'<td>'+esc(type||'성별 확인 필요')+'</td><td>'+(ready?'등록 유지 · 현재 추천 가능합니다.':'등록 유지 · 현재 추천 대상이 아닙니다.')+'</td><td><button onclick="removePartner('+i+')">해제</button></td></tr>';
+  }).join('')||'<tr><td colspan="6">등록한 파트너가 없습니다.</td></tr>';
+}
+function savePartner(){
+  const a=$('partnerA').value,b=$('partnerB').value,emoji=$('partnerEmoji').value;
+  if(!get(a)||!get(b)||a===b)return tell('서로 다른 두 선수를 선택하세요.');
+  if(!partnerType([get(a),get(b)]))return tell('두 선수의 성별을 먼저 지정하세요. 대기 상태나 그룹은 등록 조건이 아닙니다.');
+  if(!emoji)return tell('이모티콘을 선택하세요.');
+  const base='pair-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
+  let pairId=base,suffix=0;
+  while((state.partners||[]).some(pair=>pair.id===pairId))pairId=base+'-'+(++suffix);
+  const pair={id:pairId,ids:[a,b],emoji};
+  const error=partnerError([...(state.partners||[]),pair],state.players);
+  if(error)return tell(error);
+  checkpoint();state.partners=state.partners||[];state.partners.push(pair);
+  commit('파트너를 등록했습니다. 대기 상태와 관계없이 유지되며 두 선수의 이름 뒤에 '+emoji+' 표시가 붙습니다.');
+}
+function removePartner(i){
+  const pair=(state.partners||[])[i];if(!pair||!confirm('이 파트너 연결을 해제할까요? 기존 경기 기록은 유지됩니다.'))return;
+  checkpoint();state.partners.splice(i,1);commit('파트너 연결을 해제했습니다.');
+}
+function rank(p){return (p.group-1)%6+1;}
+// Compare role-matched groups, not raw male/female group IDs.
+function opponentOptions(team,free){
+  const others=free.filter(p=>!team.some(a=>a.id===p.id));
+  const buckets=new Map();
+  for(const p of others){if(!buckets.has(p.group))buckets.set(p.group,[]);buckets.get(p.group).push(p);}
+  let best=Infinity,options=[];
+  for(const [ga,as] of buckets){
+    if(as[0].gender!==team[0].gender)continue;
+    for(const [gb,bs] of buckets){
+      if(bs[0].gender!==team[1].gender||(ga===gb&&as.length<2))continue;
+      const da=Math.abs(rank(as[0])-rank(team[0])),db=Math.abs(rank(bs[0])-rank(team[1]));
+      const balance=Math.abs(rank(as[0])+rank(bs[0])-rank(team[0])-rank(team[1]));
+      const score=Math.max(da,db)*100+(da+db)*10+balance;
+      if(score<best){best=score;options=[];}
+      if(score===best)options.push([as,bs]);
+    }
+  }
+  return options;
+}
+function makePartnerCandidate(type,entry){
+  const [as,bs]=shuffle(entry.options)[0],a=shuffle(as)[0],b=shuffle(bs.filter(p=>p.id!==a.id))[0];
+  const ps=[...entry.team,a,b];
+  return {type,ids:ps.map(p=>p.id),groups:[...new Set(ps.map(p=>p.group))],playerGroups:ps.map(p=>p.group),partner:true};
+}
+
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+// Shortage fallback: use exactly the same adjacent ranks for both genders.
+function adjacentMixedOptions(free){
+  const options=[];
+  for(let g=1;g<6;g++){
+    const groups=[g,g+7,g+1,g+6]; // M(g)+F(g+1) vs M(g+1)+F(g)
+    const buckets=groups.map(group=>free.filter(p=>p.group===group));
+    if(buckets.every(ps=>ps.length))options.push(buckets);
+  }
+  return options;
+}
+function makeAdjacentMixedCandidate(options){
+  const ps=shuffle(options)[0].map(bucket=>shuffle(bucket)[0]);
+  return {type:'혼복',ids:ps.map(p=>p.id),groups:ps.map(p=>p.group),playerGroups:ps.map(p=>p.group),partner:false,adjacent:true};
+}
+function recommend(type='남복'){
+  if(!['남복','여복','혼복'].includes(type))return;
+  const free=state.players.filter(available),buckets=[];
+  for(let g=1;g<=12;g++){
+    const ps=free.filter(p=>p.group===g);if(ps.length>=2)buckets.push({g,ps});
+  }
+  const male=buckets.filter(b=>b.g<=6),female=buckets.filter(b=>b.g>6),pool=type==='남복'?male:female;
+  const ordinaryPossible=type==='혼복'?(male.length>0&&female.length>0):pool.length>=2;
+  const adjacentOptions=type==='혼복'&&!ordinaryPossible?adjacentMixedOptions(free):[];
+  // Draw exactly once per button press; candidate retries never redraw the 50% gate.
+  const preferPartner=Math.random()<0.5;
+  const eligible=preferPartner?(state.partners||[]).map(pair=>({team:pair.ids.map(get)})).filter(entry=>entry.team.every(available)&&partnerType(entry.team)===type).map(entry=>({...entry,options:opponentOptions(entry.team,free)})).filter(entry=>entry.options.length):[];
+  const usePartner=preferPartner&&eligible.length>0;
+  proposals=[];
+  if(!usePartner&&!ordinaryPossible&&!adjacentOptions.length){
+    renderCandidates();return tell('일반 '+type+' 추천 조건에 맞는 인원이 부족합니다. 남복·여복은 서로 다른 두 그룹에 각 2명, 혼복은 남녀 한 그룹씩에 각 2명이 필요합니다. 부족할 때는 같은 인접 그룹 번호(예: 1·2)의 남녀 네 그룹에 각 1명이 있어야 교차 추천할 수 있습니다. 파트너 우선 추천은 버튼을 누를 때 50% 확률로 적용됩니다.');
+  }
+  const seen=new Set();
+  for(let tries=0;tries<300&&proposals.length<3;tries++){
+    let candidate;
+    if(usePartner){candidate=makePartnerCandidate(type,shuffle(eligible)[0]);}
+    else if(!ordinaryPossible){candidate=makeAdjacentMixedCandidate(adjacentOptions);}
+    else{
+      const pair=type==='혼복'?[shuffle(male)[0],shuffle(female)[0]]:shuffle(pool).slice(0,2);
+      const a=shuffle(pair[0].ps).slice(0,2),b=shuffle(pair[1].ps).slice(0,2),ps=[a[0],b[0],a[1],b[1]];
+      candidate={type,groups:pair.map(x=>x.g),ids:ps.map(p=>p.id),playerGroups:ps.map(p=>p.group),partner:false};
+    }
+    const teams=[candidate.ids.slice(0,2).sort(),candidate.ids.slice(2).sort()].sort((x,y)=>JSON.stringify(x).localeCompare(JSON.stringify(y)));
+    const key=JSON.stringify(teams);if(!seen.has(key)){seen.add(key);proposals.push(candidate);}
+  }
+  renderCandidates();tell(type+' 후보 '+proposals.length+'개를 생성했습니다. '+(usePartner?'파트너 우선 추첨이 적용되었습니다. 같은 그룹의 상대부터 우선 추천합니다.':!ordinaryPossible?'인원이 부족하여 인접 그룹에서 남녀 각 1명씩 선발해 교차 팀을 구성했습니다.':preferPartner?'조건에 맞는 파트너 경기가 없어 일반 랜덤 추천을 적용했습니다.':'일반 랜덤 추첨이 적용되었습니다.')+' 후보 하나를 선택하면 나머지는 해제됩니다.');
+}
+
+function accept(i){
+  const c=proposals[i];if(!c)return;
+  if(c.ids.some((id,k)=>!get(id)||get(id).loc!=='free'||get(id).group!==c.playerGroups[k])){proposals=[];renderCandidates();return tell('선수 상태가 달라졌습니다. 후보를 다시 생성하세요.');}
+  const n=[1,2,3,4].find(k=>!members('wait',k).length);if(!n)return tell('완전히 비어 있는 대기 칸이 없습니다. 대기 경기를 코트로 이동하거나 해제하세요.');
+  checkpoint();c.ids.forEach((id,k)=>get(id).loc='wait'+n+':'+k);commit('선택한 경기의 4명을 대기 '+n+'에 배치했습니다.');
+}
+function backup(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='badminton-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);tell('JSON 백업 다운로드를 요청했습니다. 다운로드 폴더를 확인하세요.');}
+async function restoreFile(input){
+  const f=input.files[0];if(!f)return;
+  try{
+    if(f.size>50000000)throw Error('파일이 너무 큽니다.');
+    const s=JSON.parse(await f.text());if(!valid(s))throw Error('지원하지 않는 백업 형식입니다.');
+    if(confirm('현재 명단, 현황판, 경기 기록을 백업 파일의 내용으로 바꿀까요? 기존 기록은 합치지 않습니다.')){checkpoint();const legacy=s.version===1;state=migrate(s);for(let n=1;n<=4;n++)ensureRecord(n,'백업에서 불러온 경기로 실제 시작 시각은 확인되지 않습니다.');commit('백업을 불러왔습니다.'+(legacy?' 기존 1~6그룹은 성별에 맞게 옮겼습니다. 기존 7그룹과 성별 미지정 선수는 그룹을 다시 지정하세요.':''));fillEditor();}
+  }catch(e){tell('백업을 불러오지 못했습니다. '+e.message);}finally{input.value='';}
+}
+function resetSession(){if(!confirm('선수와 그룹은 유지하고 모두 게임 가능 대기로 옮기며 완료 경기 수를 0으로 초기화할까요? 경기 기록은 보관하고 진행 중인 경기는 취소로 남깁니다.'))return;checkpoint();for(let n=1;n<=4;n++)closeRecord(n,'취소','새 모임 시작으로 종료했습니다.');state.session++;state.players.forEach(p=>{p.loc='free';p.games=0;});commit('새 모임을 시작했습니다. 선수, 그룹, 파트너, 이전 경기 기록은 유지했습니다.');}
+function emptyAll(){if(!confirm('모든 선수와 현황판을 비울까요? 이전 경기 기록은 보관하고 진행 중인 경기는 취소로 남깁니다.'))return;checkpoint();for(let n=1;n<=4;n++)closeRecord(n,'취소','명단 비우기로 종료했습니다.');state.players=[];state.partners=[];state.session++;commit('명단을 비웠습니다. 이전 경기 기록은 유지했습니다. 실제 선수를 등록하세요.');fillEditor();}
+const TEMPLATE_BASE64='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';
+
+// XLSX reader: local ZIP + XML, no remote services or external libraries.
+let importRows=[], importBusy=false, importToken=0;
+function openEditor(){view('board');$('editId').value='';fillEditor();$('playerEditor').scrollIntoView({behavior:'smooth',block:'center'});$('name').focus({preventScroll:true});}
+function openImport(){$('importPanel').scrollIntoView({behavior:'smooth',block:'start'});$('importPanel').focus({preventScroll:true});}
+function downloadTemplate(){
+  const binary=atob(TEMPLATE_BASE64), bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+  const url=URL.createObjectURL(new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
+  const a=document.createElement('a');a.href=url;a.download='badminton_players_template.xlsx';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500);
+}
+function importMessage(message,error=false){$('importStatus').textContent=message;$('importStatus').classList.toggle('error',error);}
+function clearImport(){importToken++;importRows=[];importBusy=false;$('excelFile').value='';$('importPreview').innerHTML='';$('importConfirm').disabled=true;importMessage('파일을 선택하면 등록 전에 미리보기를 표시합니다.');}
+function parseXml(str){
+  if(/<!DOCTYPE|<!ENTITY/i.test(str))throw Error('지원하지 않는 XML 형식입니다.');
+  const doc=new DOMParser().parseFromString(str,'application/xml');
+  if(doc.getElementsByTagName('parsererror').length)throw Error('엑셀 XML을 읽을 수 없습니다.');
+  return doc;
+}
+const xmlTags=(node,name)=>Array.from(node.getElementsByTagNameNS('*',name));
+async function openXlsx(buffer){
+  const bytes=new Uint8Array(buffer), v=new DataView(buffer), decoder=new TextDecoder('utf-8');
+  let end=-1;
+  for(let i=bytes.length-22;i>=Math.max(0,bytes.length-65557);i--){
+    if(v.getUint32(i,true)===0x06054b50&&i+22+v.getUint16(i+20,true)===bytes.length){end=i;break;}
+  }
+  if(end<0)throw Error('유효한 .xlsx 파일이 아닙니다.');
+  if(v.getUint16(end+4,true)||v.getUint16(end+6,true))throw Error('분할 압축은 지원하지 않습니다.');
+  const count=v.getUint16(end+10,true), directory=v.getUint32(end+16,true);
+  if(count>3000)throw Error('파일 내 항목이 너무 많습니다. 선수 명단만 새 파일에 저장하세요.');
+  const files=new Map();let pos=directory, total=0;
+  for(let i=0;i<count;i++){
+    if(pos+46>bytes.length||v.getUint32(pos,true)!==0x02014b50)throw Error('엑셀 압축 목록이 손상되었습니다.');
+    const flags=v.getUint16(pos+8,true),method=v.getUint16(pos+10,true),size=v.getUint32(pos+20,true),raw=v.getUint32(pos+24,true),nl=v.getUint16(pos+28,true),el=v.getUint16(pos+30,true),cl=v.getUint16(pos+32,true),offset=v.getUint32(pos+42,true);
+    if(pos+46+nl+el+cl>bytes.length)throw Error('압축 목록 범위가 올바르지 않습니다.');
+    const name=decoder.decode(bytes.slice(pos+46,pos+46+nl));
+    total+=raw;if(raw>16000000||total>40000000)throw Error('압축 해제 크기가 너무 큽니다. 선수 명단만 새 파일에 저장하세요.');
+    files.set(name,{flags,method,size,raw,offset});pos+=46+nl+el+cl;
+  }
+  return async function read(name){
+    const f=files.get(name);if(!f)return null;
+    if(f.flags&1)throw Error('암호화된 엑셀 파일은 지원하지 않습니다.');
+    if(f.offset+30>bytes.length||v.getUint32(f.offset,true)!==0x04034b50)throw Error('압축 항목이 손상되었습니다.');
+    const start=f.offset+30+v.getUint16(f.offset+26,true)+v.getUint16(f.offset+28,true);
+    if(start+f.size>bytes.length)throw Error('압축 데이터가 손상되었습니다.');
+    let data=bytes.slice(start,start+f.size);
+    if(f.method===8){
+      let ds;try{ds=new DecompressionStream('deflate-raw');}catch(e){throw Error('이 브라우저는 엑셀 압축 해제를 지원하지 않습니다. 최신 Chrome 또는 Edge로 열어 주세요.');}
+      const reader=new Blob([data]).stream().pipeThrough(ds).getReader();let chunks=[],length=0;
+      while(true){
+        const part=await reader.read();if(part.done)break;
+        length+=part.value.length;if(length>f.raw||length>16000000){await reader.cancel();throw Error('엑셀 압축 크기가 올바르지 않습니다.');}
+        chunks.push(part.value);
+      }
+      data=new Uint8Array(length);let at=0;for(const c of chunks){data.set(c,at);at+=c.length;}
+    }else if(f.method!==0)throw Error('지원하지 않는 엑셀 압축 방식입니다.');
+    if(data.length!==f.raw)throw Error('압축 해제 결과 크기가 올바르지 않습니다.');
+    return decoder.decode(data);
+  };
+}
+function resolvePart(base,target){
+  const parts=(target.startsWith('/')?target.slice(1):base+target).split('/'), out=[];
+  for(const p of parts){if(p==='..')out.pop();else if(p&&p!=='.')out.push(p);}
+  return out.join('/');
+}
+async function xlsxRows(buffer){
+  const read=await openXlsx(buffer), workbookText=await read('xl/workbook.xml'), relText=await read('xl/_rels/workbook.xml.rels');
+  if(!workbookText||!relText)throw Error('엑셀 통합 문서 정보를 찾지 못했습니다.');
+  const workbook=parseXml(workbookText),rels=xmlTags(parseXml(relText),'Relationship'),sheet=xmlTags(workbook,'sheet')[0];
+  if(!sheet)throw Error('첫 번째 시트가 없습니다.');
+  const rid=sheet.getAttribute('r:id')||sheet.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','id');
+  const rel=rels.find(r=>r.getAttribute('Id')===rid);
+  if(!rel||rel.getAttribute('TargetMode')==='External'||!rel.getAttribute('Type').endsWith('/worksheet'))throw Error('첫 번째 시트를 일반 워크시트로 작성하세요.');
+  const sheetText=await read(resolvePart('xl/',rel.getAttribute('Target')));if(!sheetText)throw Error('첫 번째 시트를 찾지 못했습니다.');
+  const sharedRel=rels.find(r=>r.getAttribute('Type').endsWith('/sharedStrings'));
+  const sharedText=await read(sharedRel?resolvePart('xl/',sharedRel.getAttribute('Target')):'xl/sharedStrings.xml');
+  function richText(node){return xmlTags(node,'t').filter(t=>!(t.parentNode&&t.parentNode.localName==='rPh')).map(t=>t.textContent).join('');}
+  const strings=sharedText?xmlTags(parseXml(sharedText),'si').map(richText):[];
+  const rows=[];
+  for(const row of xmlTags(parseXml(sheetText),'row')){
+    const vals=['','','',''];let formula=false,cellError=false;
+    for(const cell of xmlTags(row,'c')){
+      const ref=(cell.getAttribute('r')||'').match(/^([A-Z]+)[0-9]+$/);if(!ref||!['A','B','C','D'].includes(ref[1]))continue;
+      const col=ref[1].charCodeAt(0)-65, type=cell.getAttribute('t'), value=xmlTags(cell,'v')[0];
+      if(xmlTags(cell,'f').length)formula=true;if(type==='e')cellError=true;
+      vals[col]=type==='s'?(strings[Number(value?value.textContent:-1)]??''):type==='inlineStr'?richText(cell):(value?value.textContent:'');
+    }
+    if(vals.some(x=>String(x).trim())||formula||cellError)rows.push({line:Number(row.getAttribute('r')),vals,formula,cellError});
+    if(rows.length>501)throw Error('한 파일에는 헤더와 선수 최대 500명만 입력하세요.');
+  }
+  return {rows,sheetName:sheet.getAttribute('name')};
+}
+function normalizeGender(value){const x=String(value).trim().toLowerCase();if(['남','남자','남성','m','male'].includes(x))return '남';if(['여','여자','여성','f','female'].includes(x))return '여';return null;}
+function personKey(p){return JSON.stringify([p.name,p.gender||'',String(p.age),p.level]);}
+function validateImport(rows){
+  const existing=new Set(state.players.map(personKey)), names=new Set(state.players.map(p=>p.name));
+  return rows.map(r=>{
+    const [name,g,rawAge,level]=r.vals.map(x=>String(x).trim()), gender=normalizeGender(g),age=rawAge,errors=[];
+    if(r.formula)errors.push('수식 대신 값을 입력하세요.');if(r.cellError)errors.push('엑셀 셀 오류를 수정하세요.');
+    if(!name||name.length>24)errors.push('이름은 1~24자로 입력하세요.');if(!gender)errors.push('성별을 남 또는 여로 입력하세요.');
+    if(!validBirth(rawAge))errors.push('출생년도는 숫자만 최대 4자리로 입력하세요.');
+    if(level.length>12)errors.push('급수는 12자 이하로 입력하세요.');
+    const player={name,gender:gender||'',age,level}, key=personKey(player),duplicate=!errors.length&&existing.has(key),sameName=!errors.length&&!duplicate&&names.has(name);
+    if(!errors.length){existing.add(key);names.add(name);}
+    return {...r,player,errors,duplicate,sameName};
+  });
+}
+function previewImport(){
+  const rows=validateImport(importRows),bad=rows.filter(r=>r.errors.length).length,skip=rows.filter(r=>r.duplicate).length,add=rows.length-bad-skip,tooMany=state.players.length+add>500;
+  $('importPreview').innerHTML='<table><thead><tr><th>행</th><th>이름</th><th>성별</th><th>출생년도</th><th>급수</th><th>검사 결과</th></tr></thead><tbody>'+rows.map(r=>'<tr class="'+(r.errors.length?'row-error':r.duplicate?'row-skip':r.player.gender==='남'?'roster-male':'roster-female')+'"><td>'+r.line+'</td>'+r.vals.map(v=>'<td>'+esc(v)+'</td>').join('')+'<td>'+esc(r.errors.length?r.errors.join(' '):r.duplicate?'중복이므로 제외합니다.':r.sameName?'동명이인을 별도로 추가합니다.':'추가할 수 있습니다.')+'</td></tr>').join('')+'</tbody></table>';
+  importMessage('전체 '+rows.length+'행 중 '+add+'명을 추가할 수 있습니다. 중복은 '+skip+'행, 오류는 '+bad+'행입니다.'+(tooMany?' 등록 후 총원이 500명을 초과합니다.':'')+(bad?' 오류를 수정한 파일을 다시 선택하세요.':''),bad>0||tooMany);
+  $('importConfirm').disabled=importBusy||bad>0||tooMany||add===0;
+  return {rows,bad,add,tooMany};
+}
+async function readExcel(input){
+  const file=input.files[0];clearImport();if(!file)return;
+  const token=++importToken;importBusy=true;importMessage(file.name+' 파일을 읽고 있습니다.');
+  try{
+    if(!/\.xlsx$/i.test(file.name))throw Error('.xlsx 파일을 선택하세요.');if(file.size>5000000)throw Error('파일 크기는 5MB 이하로 줄여 주세요.');
+    const result=await xlsxRows(await file.arrayBuffer());if(token!==importToken)return;
+    const first=result.rows[0];
+    if(!first||first.line!==1||first.formula||first.cellError||!['이름|성별|출생년도|급수','이름|성별|나이|급수'].includes(first.vals.map(x=>String(x).trim()).join('|')))throw Error('첫 번째 시트의 1행은 A: 이름, B: 성별, C: 출생년도, D: 급수여야 합니다.');
+    importRows=result.rows.slice(1);if(!importRows.length)throw Error('2행부터 선수 정보를 입력하세요.');
+    importBusy=false;previewImport();tell('엑셀 첫 번째 시트 「'+result.sheetName+'」를 읽었습니다. 아래 미리보기를 확인하세요.');
+  }catch(e){if(token!==importToken)return;importRows=[];importBusy=false;$('importConfirm').disabled=true;importMessage('등록하지 못했습니다. '+e.message,true);}
+}
+function confirmImport(){
+  if(importBusy||!importRows.length)return;
+  const result=previewImport();if(result.bad||result.tooMany||!result.add)return;
+  if(!confirm(result.add+'명을 기존 명단에 추가할까요? 새 선수는 그룹 미지정·게임 가능 대기로 등록됩니다.'))return;
+  checkpoint();
+  for(const r of result.rows){
+    if(r.duplicate)continue;
+    state.players.push({...r.player,id:'p-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2),group:0,loc:'free',games:0});
+  }
+  commit('엑셀에서 '+result.add+'명을 등록했습니다. 그룹 / 선수 관리에서 실력 그룹을 지정하세요.');clearImport();importMessage(result.add+'명을 등록했습니다. 직전 작업 취소로 일괄 등록을 되돌릴 수 있습니다.');
+}
+
+for(let n=1;n<=4;n++)ensureRecord(n,'저장된 코트에서 이어받은 경기로 실제 시작 시각은 확인되지 않습니다.');
+render();persist();
+</script>
+<script id="sheet-group-list-helper">
+window.sheetGroupList = function(){
+  var max = 0;
+  if(window.state && Array.isArray(state.players)){
+    state.players.forEach(function(p){ var g=parseInt(p.group,10); if(g>max) max=g; });
+  }
+  max = Math.max(max, 6);
+  var arr=[]; for(var i=1;i<=max;i++) arr.push(i); arr.push(0); return arr;
+};
+</script>
+
+<script id="sheet-sync-dynamic-groups-script">
+(function(){
+  const LS_URL='googleSheetPublicUrl';
+  const LS_AUTO='googleSheetAutoSync';
+  let syncTimer=null;
+  function $(id){ return document.getElementById(id); }
+  function setStatus(msg){ const el=$('sheetSyncStatus'); if(el) el.textContent=msg; }
+  function normalizeGender(v){
+    v=String(v||'').trim().toLowerCase();
+    if(['남','남성','m','male','man','boy'].includes(v)) return '남';
+    if(['여','여성','f','female','woman','girl'].includes(v)) return '여';
+    return v ? v : '';
+  }
+  function getVal(row, names){
+    for(const n of names){ if(row[n]!==undefined && row[n]!==null && String(row[n]).trim()!=='') return String(row[n]).trim(); }
+    return '';
+  }
+  function csvParse(csv){
+    const rows=[]; let row=[], cur='', q=false;
+    for(let i=0;i<csv.length;i++){
+      const c=csv[i], n=csv[i+1];
+      if(q){
+        if(c==='"' && n==='"'){ cur+='"'; i++; }
+        else if(c==='"'){ q=false; }
+        else cur+=c;
+      }else{
+        if(c==='"') q=true;
+        else if(c===','){ row.push(cur); cur=''; }
+        else if(c==='\n'){ row.push(cur); rows.push(row); row=[]; cur=''; }
+        else if(c==='\r'){}
+        else cur+=c;
+      }
+    }
+    row.push(cur); rows.push(row);
+    return rows.filter(r=>r.some(x=>String(x).trim()!==''));
+  }
+  function rowsToObjects(rows){
+    if(!rows.length) return [];
+    const headers=rows[0].map(h=>String(h||'').trim());
+    return rows.slice(1).map(r=>{
+      const o={}; headers.forEach((h,i)=>{ o[h]=r[i]||''; }); return o;
+    });
+  }
+  function toCsvUrl(url){
+    url=String(url||'').trim();
+    if(!url) throw new Error('구글시트 URL을 입력해 주세요.');
+    if(url.includes('/export?') || url.includes('output=csv')) return url;
+    const idMatch=url.match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+    if(!idMatch) return url;
+    const gidMatch=url.match(/[?&#]gid=([0-9]+)/);
+    const gid=gidMatch?gidMatch[1]:'0';
+    return 'https://docs.google.com/spreadsheets/d/'+idMatch[1]+'/export?format=csv&gid='+gid;
+  }
+  function existingById(){
+    const m=new Map();
+    (window.state&&Array.isArray(state.players)?state.players:[]).forEach(p=>m.set(String(p.id),p));
+    return m;
+  }
+  function normalizeGroup(g){
+    g=String(g||'').trim();
+    const n=parseInt(g.replace(/[^0-9-]/g,''),10);
+    return Number.isFinite(n) && n>0 ? n : 0;
+  }
+  function applyRows(objs){
+    if(!window.state) window.state={players:[]};
+    if(!Array.isArray(state.players)) state.players=[];
+    const old=existingById();
+    const next=[];
+    objs.forEach((row,idx)=>{
+      const name=getVal(row,['name','이름','성명','선수명']);
+      if(!name) return;
+      const rawId=getVal(row,['playerId','id','ID','선수ID','고유ID']);
+      const id=rawId || ('sheet_'+name+'_'+idx);
+      const prev=old.get(String(id)) || {};
+      const gender=normalizeGender(getVal(row,['gender','성별','sex']));
+      const birth=getVal(row,['birthYear','birth','year','출생년도','년생','나이']);
+      const level=getVal(row,['level','급수','등급']);
+      const group=normalizeGroup(getVal(row,['group','그룹','그룹','조']));
+      next.push(Object.assign({}, prev, {
+        id:String(id), name:name, gender:gender, age:birth.replace(/[^0-9]/g,''), level:level, group:group,
+        loc: prev.loc || 'free', games: Number(prev.games||0), sheetManaged:true
+      }));
+    });
+    // Keep non-sheet local players only if they were not from earlier sheet import.
+    const local=(state.players||[]).filter(p=>!p.sheetManaged && !String(p.id||'').startsWith('sheet_'));
+    state.players=local.concat(next);
+    try{ localStorage.setItem('badmintonState', JSON.stringify(state)); }catch(e){}
+    if(typeof window.render==='function') window.render();
+    setTimeout(markCompactEmptyGroups,50);
+    return next.length;
+  }
+  async function syncSheet(){
+    const input=$('sheetUrl');
+    const url=input?input.value.trim():localStorage.getItem(LS_URL)||'';
+    const csvUrl=toCsvUrl(url);
+    setStatus('동기화 중입니다...');
+    const res=await fetch(csvUrl, {cache:'no-store'});
+    if(!res.ok) throw new Error('시트를 불러오지 못했습니다. 공개 권한과 URL을 확인해 주세요. HTTP '+res.status);
+    const csv=await res.text();
+    const count=applyRows(rowsToObjects(csvParse(csv)));
+    localStorage.setItem(LS_URL,url);
+    setStatus('동기화 완료: '+count+'명 · '+new Date().toLocaleTimeString());
+  }
+  function usedGroups(){
+    const s=new Set();
+    (window.state&&Array.isArray(state.players)?state.players:[]).forEach(p=>{ const g=normalizeGroup(p.group); if(g>0) s.add(g); });
+    return s;
+  }
+  function inferGroupNumber(box){
+    const h=box.querySelector('h3'); const t=h?h.textContent:'';
+    const m=t.match(/(?:그룹|그룹|Group)?\s*([0-9]+)/); return m?parseInt(m[1],10):0;
+  }
+  function markCompactEmptyGroups(){
+    document.querySelectorAll('.groupbox').forEach(box=>{
+      const pool=box.querySelector('.pool');
+      const n=pool?pool.children.length:0;
+      if(n===0) box.classList.add('sheet-empty-compact'); else box.classList.remove('sheet-empty-compact');
+    });
+  }
+  function patchRender(){
+    if(!window.render || window.render.__sheetPatched) return;
+    const original=window.render;
+    window.render=function(){
+      const r=original.apply(this, arguments);
+      setTimeout(markCompactEmptyGroups,0);
+      return r;
+    };
+    window.render.__sheetPatched=true;
+  }
+  function init(){
+    const input=$('sheetUrl'), auto=$('sheetAutoSync');
+    if(input) input.value=localStorage.getItem(LS_URL)||'';
+    if(auto){ auto.checked=(localStorage.getItem(LS_AUTO)||'1')!=='0'; auto.addEventListener('change',()=>{localStorage.setItem(LS_AUTO,auto.checked?'1':'0'); setupTimer();}); }
+    const save=$('sheetSyncSave'), now=$('sheetSyncNow');
+    if(save) save.addEventListener('click',()=>{ if(input) localStorage.setItem(LS_URL,input.value.trim()); setStatus('주소를 저장했습니다.'); setupTimer(); });
+    if(now) now.addEventListener('click',()=>syncSheet().catch(e=>setStatus('오류: '+e.message)));
+    patchRender(); setupTimer(); markCompactEmptyGroups();
+    if(input && input.value.trim()) syncSheet().catch(e=>setStatus('자동 동기화 오류: '+e.message));
+  }
+  function setupTimer(){
+    if(syncTimer) clearInterval(syncTimer);
+    const auto=$('sheetAutoSync');
+    if(auto && auto.checked) syncTimer=setInterval(()=>syncSheet().catch(e=>setStatus('자동 동기화 오류: '+e.message)),30000);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+
+</body></html>
